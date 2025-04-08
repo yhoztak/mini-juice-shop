@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vulnerable Juice Shop</title>
+</head>
+<body>
+    <h1>Welcome to the Vulnerable Juice Shop</h1>
+    <p>This is a deliberately vulnerable application for testing purposes.</p>
+
+    <form action="#" method="GET">
+        <label for="userInput">Enter your name:</label>
+        <input type="text" id="userInput" name="userInput">
+        <button type="submit">Submit</button>
+    </form>
+
+    <p id="displayInput"></p>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const userInput = urlParams.get('userInput');
+        if (userInput) {
+            document.getElementById('displayInput').innerHTML = `Hello, ${userInput}`; // Vulnerable to XSS
+        }
+    </script>
+</body>
+</html>
