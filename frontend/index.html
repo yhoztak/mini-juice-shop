@@ -24,5 +24,30 @@
             document.getElementById('displayInput').innerHTML = `Hello, ${userInput}`; // Vulnerable to XSS
         }
     </script>
+    <h2>Interact with Backend Services</h2>
+
+    <!-- Form to interact with the Business Logic endpoint -->
+    <form action="http://localhost:3004/purchase" method="POST">
+        <label for="product">Product:</label>
+        <input type="text" id="product" name="product" value="apple">
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" value="1">
+        <button type="submit">Purchase</button>
+    </form>
+
+    <!-- Form to interact with the Race Condition endpoint -->
+    <form action="http://localhost:3005/withdraw" method="POST">
+        <label for="amount">Withdraw Amount:</label>
+        <input type="number" id="amount" name="amount" value="100">
+        <button type="submit">Withdraw</button>
+    </form>
+
+    <script>
+        // Example of making a request to the SSRF endpoint
+        fetch('http://localhost:3003/fetch?url=http://example.com')
+            .then(response => response.text())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+    </script>
 </body>
 </html>
