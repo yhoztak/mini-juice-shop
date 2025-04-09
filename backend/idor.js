@@ -8,6 +8,17 @@ const users = {
     '2': { id: 2, name: 'Bob', role: 'user' }
 };
 
+// Simulated login endpoint
+app.post('/login', (req, res) => {
+    const { userId } = req.query;
+    const user = users[userId];
+    if (user) {
+        res.send(`Logged in as ${user.name}`);
+    } else {
+        res.status(401).send('Invalid user');
+    }
+});
+
 // Insecure Direct Object Reference (IDOR) vulnerability
 app.get('/user/:id', (req, res) => {
     const userId = req.params.id;

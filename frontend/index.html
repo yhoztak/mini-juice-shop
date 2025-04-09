@@ -14,6 +14,26 @@
         <input type="text" id="userInput" name="userInput">
         <button type="submit">Submit</button>
     </form>
+    
+    <!-- Login Form -->
+    <h2>Login</h2>
+    <form action="http://localhost:3001/login" method="POST">
+        <label for="userId">User ID:</label>
+        <input type="text" id="userId" name="userId" value="1">
+        <button type="submit">Login</button>
+    </form>
+    
+    <!-- Product Management Interface -->
+    <h2>Product Management</h2>
+    <form action="http://localhost:3004/addProduct" method="POST">
+        <label for="newProduct">Product Name:</label>
+        <input type="text" id="newProduct" name="product" value="orange">
+        <label for="newPrice">Price:</label>
+        <input type="number" id="newPrice" name="price" value="3">
+        <label for="newStock">Stock:</label>
+        <input type="number" id="newStock" name="stock" value="20">
+        <button type="submit">Add Product</button>
+    </form>
 
     <p id="displayInput"></p>
 
