@@ -5,6 +5,21 @@ policies:
   - type: "scan"
     description: >
       This frontend is part of a deliberately vulnerable application designed for testing and educational purposes.
-      It should pay attention to vulnerabilities such as Cross-Site Scripting (XSS), where user inputs are not properly sanitized,
-      and potential exposure of sensitive data through improper handling of user inputs and outputs.
-      Ensuring that user inputs are validated and encoded before being displayed is crucial to mitigate these risks.
+      It should focus on vulnerabilities specific to client-side code, such as Cross-Site Scripting (XSS) and improper
+      handling of user inputs. Pay special attention to the sanitization and encoding of user inputs to prevent XSS attacks.
+      Additionally, ensure that sensitive data is not exposed through the Document Object Model (DOM) or browser storage
+      mechanisms like localStorage or sessionStorage. Implement Content Security Policy (CSP) to add an extra layer of
+      protection against client-side attacks. Regularly review and update third-party libraries to address any known
+      vulnerabilities that could affect the frontend.
+  - type: "false_positive"
+    description: >
+      This section outlines scenarios where security alerts in the frontend may be considered false positives
+      due to specific user interactions or design choices. For example, certain UI components might use inline
+      scripts or styles for dynamic content updates, which could be misinterpreted as Cross-Site Scripting (XSS)
+      attempts. Additionally, single-page applications often make frequent API calls that could trigger alerts
+      for unusual network activity. Understanding these frontend-specific nuances is crucial for distinguishing
+      between genuine threats and benign activities that align with our user experience and design requirements.
+    cwes:
+      - 79  # CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')
+      - 116 # CWE-116: Improper Encoding or Escaping of Output
+      - 209 # CWE-209: Information Exposure Through an Error Message

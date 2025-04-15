@@ -10,3 +10,32 @@ policies:
       The 'config' directory contains configuration files that may include sensitive data
       such as credentials or API keys. It's important to ensure these files are not exposed
       to unauthorized access and are properly secured.
+  - type: "fix"
+    description: >
+      This section provides guidelines on how to address security vulnerabilities specifically in backend systems.
+      Focus on securing data storage and processing by implementing robust encryption for data at rest and in transit.
+      Ensure that all backend services authenticate and authorize requests properly to prevent unauthorized access.
+      Regularly validate and sanitize all inputs to the backend to mitigate risks such as SQL injection and command injection.
+      Implement logging and monitoring to detect and respond to suspicious activities in real-time. Keep backend dependencies
+      up-to-date to patch known vulnerabilities and conduct regular security audits to identify and address new threats.
+    cwes:
+      - 22  # CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')
+      - 89  # CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')
+      - 200 # CWE-200: Exposure of Sensitive Information to an Unauthorized Actor
+      - 284 # CWE-284: Improper Access Control
+      - 311 # CWE-311: Missing Encryption of Sensitive Data
+      - 502 # CWE-502: Deserialization of Untrusted Data
+      - 611 # CWE-611: Improper Restriction of XML External Entity Reference
+  - type: "false_positive"
+    description: >
+      This section outlines scenarios where security alerts in the backend may be considered false positives
+      due to specific business logic or domain knowledge. For example, backend batch processing jobs might
+      generate high volumes of database queries or file operations that could be misinterpreted as suspicious
+      activity. Additionally, backend services that handle dynamic content generation might trigger alerts for
+      potential injection attacks, which are expected and should not be flagged as security incidents. Understanding
+      these backend-specific nuances is crucial for distinguishing between genuine threats and benign activities
+      that align with our operational requirements.
+    cwes:
+      - 20  # CWE-20: Improper Input Validation
+      - 78  # CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')
+      - 209 # CWE-209: Information Exposure Through an Error Message
