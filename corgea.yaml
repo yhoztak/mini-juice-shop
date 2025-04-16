@@ -2,6 +2,7 @@
 # For more information, visit: https://docs.corgea.app/policies
 version: 1  # Specifies the version of the corgea YAML standard being used. Update only if the standard changes.
 policies:
+
   - type: "fix"
     description: >
       This section provides guidelines on how to fix security vulnerabilities in the backend code.

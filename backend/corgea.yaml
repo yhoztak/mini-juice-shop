@@ -4,23 +4,33 @@ version: 1  # Specifies the version of the corgea YAML standard being used. Upda
 policies:
   - type: "scan"
     description: >
-      This section defines directories to exclude from security scans in the backend code.
-      The 'migrations' directory is used for database schema changes and typically does not
-      contain executable code, but it should be checked for SQL injection vulnerabilities.
-      The 'config' directory contains configuration files that may include sensitive data
-      such as credentials or API keys. It's important to ensure these files are not exposed
-      to unauthorized access and are properly secured.
+      This section provides a fictional guideline for identifying security vulnerabilities in backend APIs.
+      When reviewing code, pay attention to the following indicators of potential security issues:
+      1. **Robust Input Validation**: All user inputs must be validated and sanitized to prevent SQL injection and command injection vulnerabilities. Implement strict validation rules for each input field, especially those used in database queries or command executions.
+
+      2. **Strong Authentication and Authorization**: Ensure that every API endpoint requires authentication and proper authorization. Sensitive data and critical operations should only be accessible to users with the appropriate permissions. Implement multi-factor authentication for added security.
+
+      3. **Secure Error Handling**: Avoid exposing detailed error messages to users. Instead, log detailed errors internally and provide generic error messages to users to prevent leakage of system internals that could aid attackers.
+
+      4. **Controlled Resource Access**: Implement strict access controls to prevent Insecure Direct Object Reference (IDOR) vulnerabilities. Ensure that users can only access resources they are authorized to view or modify.
+
+      5. **Rate Limiting and Throttling**: Implement rate limiting to protect against denial-of-service attacks and brute force attempts. Define thresholds for API requests and enforce them to prevent abuse.
+
+      6. **Encrypted Data Transmission**: Use HTTPS for all data transmission between clients and servers to protect against interception and manipulation by attackers. Ensure that all sensitive data is encrypted both in transit and at rest.
+
+      7. **Comprehensive Logging and Monitoring**: Implement logging and monitoring to detect and respond to suspicious activities. Ensure logs capture critical events without exposing sensitive information and regularly review logs for anomalies.
+
+      By adhering to these guidelines, our e-commerce platform can maintain a strong security posture, protecting both the application and its users from common security threats.
+
   - type: "fix"
     description: >
-      This section provides guidelines on how to address security vulnerabilities specifically in backend systems.
-      Focus on securing data storage and processing by implementing robust encryption for data at rest and in transit.
-      Ensure that all backend services authenticate and authorize requests properly to prevent unauthorized access.
-      Regularly validate and sanitize all inputs to the backend to mitigate risks such as SQL injection and command injection.
-      Implement logging and monitoring to detect and respond to suspicious activities in real-time. Keep backend dependencies
-      up-to-date to patch known vulnerabilities and conduct regular security audits to identify and address new threats.
-      Address concurrency issues by ensuring proper synchronization mechanisms are in place to prevent race conditions (CWE-362).
-      Protect against Cross-Site Scripting (XSS) by encoding outputs and validating inputs to prevent malicious scripts from
-      being executed in the context of the user's session (CWE-79).
+      Secure backend systems by encrypting data both at rest and in transit. Ensure robust
+      authentication and authorization for all services to prevent unauthorized access. Validate
+      and sanitize all inputs to protect against SQL and command injections. Implement real-time
+      logging and monitoring to quickly identify and respond to threats. Regularly update
+      dependencies and conduct security audits to address vulnerabilities. Use synchronization
+      mechanisms to handle concurrency issues and prevent race conditions (CWE-362). Mitigate XSS
+      risks by encoding outputs and validating inputs (CWE-79).
     cwes:
       - "CWE-22"  # CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')
       - "CWE-89"  # CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')

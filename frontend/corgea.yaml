@@ -5,12 +5,14 @@ policies:
   - type: "scan"
     description: >
       This frontend is part of a deliberately vulnerable application designed for testing and educational purposes.
-      It should focus on vulnerabilities specific to client-side code, such as Cross-Site Scripting (XSS) and improper
-      handling of user inputs. Pay special attention to the sanitization and encoding of user inputs to prevent XSS attacks.
-      Additionally, ensure that sensitive data is not exposed through the Document Object Model (DOM) or browser storage
-      mechanisms like localStorage or sessionStorage. Implement Content Security Policy (CSP) to add an extra layer of
-      protection against client-side attacks. Regularly review and update third-party libraries to address any known
-      vulnerabilities that could affect the frontend.
+      It should focus on identifying and addressing vulnerabilities specific to client-side code, such as Cross-Site Scripting (XSS),
+      improper handling of user inputs, and insecure storage practices. Implement robust input validation and output encoding to prevent
+      XSS attacks. Regularly scan for vulnerabilities in third-party libraries and update them to mitigate risks. Ensure that sensitive
+      data is not exposed through the Document Object Model (DOM) or browser storage mechanisms like localStorage or sessionStorage.
+      Implement a strict Content Security Policy (CSP) to add an extra layer of protection against client-side attacks. Use automated
+      tools to scan for common vulnerabilities and conduct manual code reviews to identify subtle security issues. Pay attention to
+      potential security misconfigurations and ensure that security headers are properly set. Regularly conduct penetration testing
+      to uncover hidden vulnerabilities and improve the overall security posture of the frontend.
   - type: "false_positive"
     description: >
       This section outlines scenarios where security alerts in the frontend may be considered false positives
@@ -20,6 +22,6 @@ policies:
       for unusual network activity. Understanding these frontend-specific nuances is crucial for distinguishing
       between genuine threats and benign activities that align with our user experience and design requirements.
     cwes:
-      - 79  # CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')
-      - 116 # CWE-116: Improper Encoding or Escaping of Output
-      - 209 # CWE-209: Information Exposure Through an Error Message
+      - "CWE-79"  # CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')
+      - "CWE-116" # CWE-116: Improper Encoding or Escaping of Output
+      - "CWE-209" # CWE-209: Information Exposure Through an Error Message
