@@ -18,24 +18,35 @@ policies:
       Regularly validate and sanitize all inputs to the backend to mitigate risks such as SQL injection and command injection.
       Implement logging and monitoring to detect and respond to suspicious activities in real-time. Keep backend dependencies
       up-to-date to patch known vulnerabilities and conduct regular security audits to identify and address new threats.
+      Address concurrency issues by ensuring proper synchronization mechanisms are in place to prevent race conditions (CWE-362).
+      Protect against Cross-Site Scripting (XSS) by encoding outputs and validating inputs to prevent malicious scripts from
+      being executed in the context of the user's session (CWE-79).
     cwes:
-      - 22  # CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')
-      - 89  # CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')
-      - 200 # CWE-200: Exposure of Sensitive Information to an Unauthorized Actor
-      - 284 # CWE-284: Improper Access Control
-      - 311 # CWE-311: Missing Encryption of Sensitive Data
-      - 502 # CWE-502: Deserialization of Untrusted Data
-      - 611 # CWE-611: Improper Restriction of XML External Entity Reference
+      - "CWE-22"  # CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')
+      - "CWE-89"  # CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')
+      - "CWE-200" # CWE-200: Exposure of Sensitive Information to an Unauthorized Actor
+      - "CWE-284" # CWE-284: Improper Access Control
+      - "CWE-311" # CWE-311: Missing Encryption of Sensitive Data
+      - "CWE-502" # CWE-502: Deserialization of Untrusted Data
+      - "CWE-611" # CWE-611: Improper Restriction of XML External Entity Reference
+      - "CWE-362"
+      - "CWE-79"
   - type: "false_positive"
     description: >
       This section outlines scenarios where security alerts in the backend may be considered false positives
       due to specific business logic or domain knowledge. For example, backend batch processing jobs might
       generate high volumes of database queries or file operations that could be misinterpreted as suspicious
       activity. Additionally, backend services that handle dynamic content generation might trigger alerts for
-      potential injection attacks, which are expected and should not be flagged as security incidents. Understanding
-      these backend-specific nuances is crucial for distinguishing between genuine threats and benign activities
+      potential injection attacks, which are expected and should not be flagged as security incidents. In the
+      case of CWE-79, certain backend systems might generate dynamic HTML content for internal use, which could
+      be flagged as Cross-Site Scripting (XSS) attempts, but are actually safe due to controlled environments.
+      For CWE-362, some backend processes might involve concurrent operations that are designed to handle race
+      conditions safely, yet automated tools might still flag them as potential issues. Understanding these
+      backend-specific nuances is crucial for distinguishing between genuine threats and benign activities
       that align with our operational requirements.
     cwes:
-      - 20  # CWE-20: Improper Input Validation
-      - 78  # CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')
-      - 209 # CWE-209: Information Exposure Through an Error Message
+      - "CWE-20"  # CWE-20: Improper Input Validation
+      - "CWE-78"  # CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')
+      - "CWE-209" # CWE-209: Information Exposure Through an Error Message
+      - "CWE-362"
+      - "CWE-79"
