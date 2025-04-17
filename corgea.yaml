@@ -1,0 +1,44 @@
+# This is the corgea YAML file used for defining and managing security policies within applications.
+# For more information, visit: https://docs.corgea.app/policies
+version: 1  # Specifies the version of the corgea YAML standard being used. Update only if the standard changes.
+policies:
+
+  - type: "fix"
+    description: >
+      This section provides guidelines on how to fix security vulnerabilities in the backend code.
+      Understanding the domain is crucial for identifying potential security risks and applying
+      appropriate fixes. For instance, in a financial application, ensuring that all transactions
+      are encrypted and logged is essential to prevent unauthorized access and fraud. Similarly,
+      in a healthcare application, protecting patient data by implementing strict access controls
+      and data encryption is vital to comply with regulations like HIPAA. Always validate and
+      sanitize user inputs to prevent common vulnerabilities such as SQL injection and cross-site
+      scripting (XSS). Regularly update dependencies to patch known vulnerabilities and conduct
+      security audits to identify and address new threats.
+    cwes:
+      - "CWE-22"  # CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')
+      - "CWE-79"  # CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')
+      - "CWE-89"  # CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')
+      - "CWE-200" # CWE-200: Exposure of Sensitive Information to an Unauthorized Actor
+      - "CWE-284" # CWE-284: Improper Access Control
+      - "CWE-311" # CWE-311: Missing Encryption of Sensitive Data
+      - "CWE-352" # CWE-352: Cross-Site Request Forgery (CSRF)
+      - "CWE-502" # CWE-502: Deserialization of Untrusted Data
+      - "CWE-611" # CWE-611: Improper Restriction of XML External Entity Reference
+    ignore_paths:
+      - "node_modules/*"
+      - "package*.json"
+  - type: "false_positive"
+    description: >
+      This section outlines scenarios where security alerts may be considered false positives
+      due to specific business logic or domain knowledge. In our e-commerce platform, certain
+      automated scripts are designed to simulate user behavior for testing purposes. These scripts
+      may trigger alerts for unusual login patterns or rapid transaction submissions, which are
+      expected and should not be flagged as security incidents. Additionally, our content management
+      system allows for dynamic content generation, which might be misinterpreted as cross-site
+      scripting attempts by automated scanners. Understanding these nuances is crucial for
+      distinguishing between genuine threats and benign activities that align with our operational
+      requirements.
+    cwes:
+      - "CWE-20"  # CWE-20: Improper Input Validation
+      - "CWE-78"  # CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')
+      - "CWE-209" # CWE-209: Information Exposure Through an Error Message
