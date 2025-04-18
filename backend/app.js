@@ -8,13 +8,18 @@ app.get('/vulnerable', (req, res) => {
     res.send(`User input: ${userInput}`);
 });
 
+const db = require('your-database-library'); // Hypothetical database library
 // Simulated database query with SQL Injection vulnerability
 app.get('/vulnerable-sql', (req, res) => {
-    const userInput = req.query.input;
-    const query = `SELECT * FROM users WHERE name = '${userInput}'`; // Vulnerable to SQL Injection
-    res.send(`Executing query: ${query}`);
+    const query = 'SELECT * FROM users WHERE name = ?';
+    db.execute(query, [req.query.input], (err, results) => {
+        if (err) {
+    return res.status(500).send('Database error');
+}
 });
+res.send(`Executing query with sanitized input: ${JSON.stringify(results)}`);
 
+});
 app.listen(port, () => {
     console.log(`Vulnerable app listening at http://localhost:${port}`);
 });
