@@ -5,7 +5,8 @@ const port = 3000;
 // Intentionally vulnerable endpoint
 app.get('/vulnerable', (req, res) => {
     const userInput = req.query.input;
-    res.send(`User input: ${userInput}`);
+    const sanitizedInput = require('xss')(userInput);
+    res.send(`User input: ${sanitizedInput}`);
 });
 
 // Simulated database query with SQL Injection vulnerability
