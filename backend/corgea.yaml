@@ -1,9 +1,0 @@
-# This is the corgea YAML file used for defining and managing security policies within applications.
-# For more information, visit: https://docs.corgea.app/policies
-version: 1  # Specifies the version of the corgea YAML standard being used. Update only if the standard changes.
-policies:
-  - type: "scan"
-    description: >
-      This section ensures that all directories and files are thoroughly scanned to detect any security vulnerabilities in the backend code.
-      It is essential to identify and address potential issues such as SQL injection, exposure of sensitive data, and unauthorized access.
-      Comprehensive scanning helps maintain the security and integrity of the application.
