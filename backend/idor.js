@@ -1,4 +1,7 @@
-const express = require('express');
+import express from 'express';
+import { ApolloServer, gql } from 'apollo-server-express';
+import resolvers from './resolvers.js';
+
 const app = express();
 const port = 3001;
 
@@ -8,28 +11,29 @@ const users = {
     '2': { id: 2, name: 'Bob', role: 'user' }
 };
 
-// Simulated login endpoint
-app.post('/login', (req, res) => {
-    const { userId } = req.query;
-    const user = users[userId];
-    if (user) {
-        res.send(`Logged in as ${user.name}`);
-    } else {
-        res.status(401).send('Invalid user');
-    }
-});
+// GraphQL type definitions
+const typeDefs = gql`
+  type User {
+    id: ID!
+    name: String!
+    role: String!
+  }
 
-// Insecure Direct Object Reference (IDOR) vulnerability
-app.get('/user/:id', (req, res) => {
-    const userId = req.params.id;
-    const user = users[userId];
-    if (user) {
-        res.json(user); // No authorization check
-    } else {
-        res.status(404).send('User not found');
-    }
-});
+  type Query {
+    user(id: ID!): User
+  }
+`;
 
-app.listen(port, () => {
-    console.log(`IDOR app listening at http://localhost:${port}`);
-});
+// Create Apollo Server
+const server = new ApolloServer({ typeDefs, resolvers });
+
+async function startServer() {
+  await server.start();
+  server.applyMiddleware({ app });
+
+  app.listen(port, () => {
+    console.log(`GraphQL server running at http://localhost:${port}${server.graphqlPath}`);
+  });
+}
+
+startServer();
