@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vulnerable Juice Shop</title>
+    <script src="sample.js"></script>
 </head>
 <body>
     <h1>Welcome to the Vulnerable Juice Shop</h1>
@@ -69,5 +70,36 @@
             .then(data => console.log(data))
             .catch(error => console.error('Error:', error));
     </script>
+    <h2>Test JavaScript Functions</h2>
+
+    <!-- Test CWE-20: Improper Input Validation -->
+    <div>
+        <h3>Test Input Validation</h3>
+        <input type="text" id="validationInput" placeholder="Enter alphanumeric text">
+        <button onclick="validateInput(document.getElementById('validationInput').value)">Validate</button>
+    </div>
+
+    <!-- Test CWE-79: Cross-site Scripting (XSS) -->
+    <div>
+        <h3>Test Safe Content Rendering</h3>
+        <input type="text" id="xssInput" placeholder="Enter text to render">
+        <button onclick="renderContent(document.getElementById('xssInput').value)">Render</button>
+    </div>
+
+    <!-- Test CWE-352: Cross-Site Request Forgery (CSRF) -->
+    <div>
+        <h3>Test CSRF Request</h3>
+        <input type="text" id="csrfUrl" placeholder="Enter URL">
+        <input type="text" id="csrfData" placeholder="Enter data">
+        <input type="text" id="csrfToken" placeholder="Enter CSRF token">
+        <button onclick="sendRequestWithCSRFToken(document.getElementById('csrfUrl').value, document.getElementById('csrfData').value, document.getElementById('csrfToken').value)">Send Request</button>
+    </div>
+
+    <!-- Test CWE-601: URL Redirection to Untrusted Site -->
+    <div>
+        <h3>Test URL Redirection</h3>
+        <input type="text" id="redirectUrl" placeholder="Enter URL to redirect">
+        <button onclick="redirectToUrl(document.getElementById('redirectUrl').value)">Redirect</button>
+    </div>
 </body>
 </html>
