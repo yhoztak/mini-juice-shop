@@ -10,3 +10,4 @@ policies:
       The 'config' directory contains configuration files that may include sensitive data
       such as credentials or API keys. It's important to ensure these files are not exposed
       to unauthorized access and are properly secured.
+    ignore_paths:  "test/*"
