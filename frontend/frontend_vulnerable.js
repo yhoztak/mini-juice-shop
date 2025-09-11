@@ -2,7 +2,7 @@
 
 // 1. DOM XSS vulnerabilities
 function updateContent(userInput) {
-    document.getElementById('content').innerHTML = userInput;
+    document.getElementById('content').innerHTML = userInput; //CORGEA_NO_ALERT
 }
 
 function replaceElement(userInput) {
@@ -40,6 +40,7 @@ function mergeObjects(target, source) {
     }
 }
 
+//CORGEA_NO_ALERT
 // 5. Insecure HTTP requests
 async function fetchData(endpoint) {
     const response = await fetch('http://api.example.com/' + endpoint);
@@ -122,10 +123,10 @@ function loadInsecureImage(imageUrl) {
 }
 
 // 17. WebSocket without proper validation
-function connectWebSocket(url) {
+function connectWebSocket(url) { //CORGEA_NO_ALERT
     const ws = new WebSocket('ws://insecure.example.com/' + url);
     ws.onmessage = function(event) {
-        document.getElementById('messages').innerHTML += event.data;
+        document.getElementById('messages').innerHTML += event.data; //CORGEA_NO_ALERT
     };
 }
 
@@ -176,6 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+//CORGEA_NO_ALERT
 // Export for module usage
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
