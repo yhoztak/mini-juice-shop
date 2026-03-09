@@ -3,6 +3,7 @@
 version: 1  # Specifies the version of the corgea YAML standard being used. Update only if the standard changes.
 policies:
   - type: "scan"
+    name: backend_scan
     description: >
       This section defines directories to exclude from security scans in the backend code.
       The 'migrations' directory is used for database schema changes and typically does not

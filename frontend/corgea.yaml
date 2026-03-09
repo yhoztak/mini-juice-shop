@@ -3,6 +3,7 @@
 version: 1  # Specifies the version of the corgea YAML standard being used. Update only if the standard changes.
 policies:
   - type: "scan"
+    name: frontend_scan
     description: >
       This frontend is part of a deliberately vulnerable application designed for testing and educational purposes.
       It should pay attention to vulnerabilities such as Cross-Site Scripting (XSS), where user inputs are not properly sanitized,
